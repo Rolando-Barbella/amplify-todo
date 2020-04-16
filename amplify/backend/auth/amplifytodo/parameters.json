@@ -1,4 +1,6 @@
 {
+    "identityPoolName": "amplifytodo_identitypool_219ec8d7",
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "amplif173fbbf3",
     "userPoolName": "amplifytodopool",
     "autoVerifiedAttributes": [
@@ -29,7 +31,7 @@
     "userpoolClientLambdaRole": "amplif173fbbf3_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
     "useDefault": "manual",
-    "authSelections": "userPoolOnly",
+    "authSelections": "identityPoolAndUserPool",
     "resourceName": "amplifytodo",
     "usernameAttributes": [
         "email"
