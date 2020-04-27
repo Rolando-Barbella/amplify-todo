@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const AddTodo = ({ onCreate }) => {
-  const [todo, setTodo] = useState({ name: '', description: '',});
+  const [todo, setTodo] = useState({ name: '' });
 
   const handleChange = (name, event) => {
     event.persist();
@@ -13,32 +13,28 @@ const AddTodo = ({ onCreate }) => {
   const submit = async() => {
     const input = {
       name: todo.name,
-      description: todo.description
     }
-    console.log(input);
-
     try {
-    	await onCreate(input)
+      await onCreate(input);
+      await setTodo({ name: ''});
     } catch (err) {
     	console.error(err);
     }
   }
 
   return (
-    <div>
+    <div className="add-container">
       <input
         name="name"
-        placeholder="name"
+        placeholder="todo"
+        value={todo.name}
         onChange={(event) =>  handleChange('name', event)}
       />
-      <input
-        name="description"
-        placeholder="description"
-        onChange={(event) => handleChange('description', event)}
-      />
-      <button onClick={submit}>
-        Add
-      </button>
+      <div>
+        <button onClick={submit} className="add-btn">
+          Add
+        </button>
+      </div>
     </div>
   );
 };
