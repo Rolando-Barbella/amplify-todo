@@ -1,15 +1,15 @@
 import '@aws-amplify/ui/dist/style.css';
-import Amplify, { Analytics, graphqlOperation, Storage } from 'aws-amplify';
+import Amplify, { Analytics, graphqlOperation } from 'aws-amplify';
 import { Connect, withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
 import React, { useEffect } from 'react';
 import AddTodo from './components/AddTodo';
 import ListView from './components/ListView';
 import './App.css';
 import awsconfig from './aws-exports';
-import * as subscriptions from './graphql/subscriptions'
+import * as subscriptions from './graphql/subscriptions';
 
 Amplify.configure(awsconfig);
-Storage.configure({ level: 'private' });
+
 
 const signUpConfig = {
   header: 'My Customized Sign Up',

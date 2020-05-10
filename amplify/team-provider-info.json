@@ -19,7 +19,9 @@
                 }
             },
             "auth": {
-                "amplifytodo": {}
+                "amplifytodo": {
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"693419361431310\",\"client_secret\":\"3e8ae12c54d8f956ed339bd24009023a\"}]"
+                }
             }
         }
     }

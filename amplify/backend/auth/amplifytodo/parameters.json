@@ -1,6 +1,6 @@
 {
     "identityPoolName": "amplifytodo_identitypool_219ec8d7",
-    "allowUnauthenticatedIdentities": true,
+    "allowUnauthenticatedIdentities": false,
     "resourceNameTruncated": "amplif173fbbf3",
     "userPoolName": "amplifytodopool",
     "autoVerifiedAttributes": [
@@ -30,7 +30,7 @@
     ],
     "userpoolClientLambdaRole": "amplif173fbbf3_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "useDefault": "manual",
+    "useDefault": "defaultSocial",
     "authSelections": "identityPoolAndUserPool",
     "resourceName": "amplifytodo",
     "usernameAttributes": [
@@ -39,7 +39,7 @@
     "userPoolGroups": false,
     "adminQueries": true,
     "triggers": "{}",
-    "hostedUI": false,
+    "hostedUI": true,
     "userPoolGroupList": [],
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -57,5 +57,11 @@
         "Ref": "AWS::StackId"
     },
     "permissions": [],
-    "dependsOn": []
+    "dependsOn": [],
+    "hostedUIDomainName": "amplifytodo668b998a-668b998a",
+    "authProvidersUserPool": [
+        "Facebook"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}}]",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:3000/\"],\"LogoutURLs\":[\"http://localhost:3000/\"]}"
 }
