@@ -1,97 +1,161 @@
-import '@aws-amplify/ui/dist/style.css';
-import Amplify, { Analytics, graphqlOperation } from 'aws-amplify';
-import { Connect, withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
-import React, { useEffect } from 'react';
-import AddTodo from './components/AddTodo';
-import ListView from './components/ListView';
-import './App.css';
+import Amplify, { Auth } from 'aws-amplify';
+import React, { useState, useEffect } from 'react';
+import InputContainer from './components/InputContainer'
 import awsconfig from './aws-exports';
-import * as subscriptions from './graphql/subscriptions';
+import './App.css';
 
 Amplify.configure(awsconfig);
 
+function App() {
+  const [user, setUser] = useState({ 
+    username: '', 
+    password: '', 
+    authenticationCode: '',
+  });
 
-const signUpConfig = {
-  header: 'My Customized Sign Up',
-  hideAllDefaults: true,
-  defaultCountryCode: '1',
-  signUpFields: [
-    {
-      label: 'Email',
-      key: 'email',
-      required: true,
-      displayOrder: 1,
-      type: 'string'
-    },
-    {
-      label: 'Password',
-      key: 'password',
-      required: true,
-      displayOrder: 2,
-      type: 'password'
-    },
-  ]
-};
+  const [step, setStep] = useState(0);
+  const [signInUser, setSignInUser] = useState({ email: null });
 
-const listTodos = `query listTodos{
-  listTodos{
-    items {
-      id
-      name
+  useEffect(() => {
+    Auth.signOut();
+    // let getUser = async() => {
+    //   try {
+    //     let user = await Auth.currentAuthenticatedUser();
+    //     console.log('user', user)
+    //     } catch (error) {
+    //     console.log(error)        
+    //   }
+    // }
+    // getUser();
+  },[])
+
+  const handleInputChange = (event, keyName) => {
+    event.persist();
+    setUser((user) => {
+      return { ...user, [keyName]: event.target.value }
+    })
+  }
+
+  const signUp = async () => {
+    try {
+      await Auth.signUp({ 
+        username: user.username, 
+        password: user.password,
+      });
+      console.log('success');
+      setStep(1);
+    } catch (error) {
+      console.log('error', error);
     }
   }
-}`;
 
-const addTodo = `mutation createTodo($name:String!) {
-  createTodo(input: {
-    name: $name
-  }){
-    id
-    name
+  const signIn = async () => {
+    try {
+      await Auth.signIn({ 
+        username: user.username, 
+        password: user.password,
+      });
+      let signInUser = await Auth.currentAuthenticatedUser();
+      setSignInUser({ email: signInUser.attributes.email });
+      console.log('success');
+      setStep(4);
+    } catch (error) {
+      console.log('error', error);
+    }
   }
-}`
 
-function App() {
-  useEffect(() => {
-    Analytics.record('Amplify_CLI');
-  },[]);
+
+  const confirmSignUp = async() => {
+    try {
+      await Auth.confirmSignUp(user.username, user.authenticationCode);
+      console.log('success confirm sign up');
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
 
   return (
-    <div className="App">
-      <div>
-        <h3>Mi aplicacion con AWS</h3>
-        <Connect mutation={graphqlOperation(addTodo)}>
-          {({mutation}) => (
-              <AddTodo onCreate={mutation}/>
-            )
-          }
-        </Connect>
-        <Connect 
-          query={graphqlOperation(listTodos)}
-          subscription={graphqlOperation(subscriptions.onCreateTodo)}
-          onSubscriptionMsg={(prev, { onCreateTodo }) => {
-            prev.listTodos.items = prev.listTodos.items.concat(onCreateTodo)
-            return prev; 
-          }}
-        >
-          {({ mutation, data: { listTodos }, loading, errors }) => {
-            if (errors.length) return (<h3>Error</h3>);
-            if (loading || !listTodos) return (<h3>Loading...</h3>);
-            return (
-              <ListView mutation={mutation} todos={listTodos.items} /> 
-            );
-          }}
-        </Connect>
+    <div className="app">
+       <div className="app-wrapper">
+        {
+          step === 0 && (
+            <>
+              <h3>Registrate con AWS Amplify</h3>
+              <InputContainer
+                labelName='Email:'
+                value={user.username}
+                keyValueName="username"
+                handleInputChange={(e) => handleInputChange(e, 'username')}
+              />
+               <InputContainer
+                labelName='Password:'
+                type="password"
+                value={user.password}
+                handleInputChange={(e) => handleInputChange(e, 'password')}
+              />
+              <button onClick={() => signUp()}>
+                Registrate
+              </button>
+              <hr/>
+              or
+              <span onClick={() => setStep(3)}>Sign In</span>
+            </>
+          )
+        }
+        {
+          step === 1 && (
+            <>
+              <h3>Confirma tu cuenta</h3>
+              <InputContainer
+                labelName='Email:'
+                value={user.username}
+                handleInputChange={(e) => handleInputChange(e, 'username')}
+              />
+              <InputContainer
+                labelName='Codigo:'
+                value={user.authenticationCode}
+                handleInputChange={(e) => handleInputChange(e, 'authenticationCode')}
+              />
+              <button onClick={() => confirmSignUp()}>
+                Confirmar
+              </button>
+            </>
+          )
+        }
+        {
+          step === 3 && (
+            <>
+              <h3>Registrate con AWS Amplify</h3>
+              <InputContainer
+                labelName='Email:'
+                value={user.username}
+                handleInputChange={(e) => handleInputChange(e, 'username')}
+              />
+               <InputContainer
+                labelName='Password:'
+                type="password"
+                value={user.password}
+                handleInputChange={(e) => handleInputChange(e, 'password')}
+              />
+              <button
+                onClick={() => signIn()}
+              >
+                Sign In
+              </button>
+            </>
+          )
+        }
+        {
+          step === 4 && (
+            <>
+             <h3>Welcome</h3>
+             <p>{signInUser.email}</p>
+            </>
+          )
+        }
       </div>
     </div>
   );
 }
 
-export default withAuthenticator(
-  App, 
-  { 
-    signUpConfig, 
-    usernameAttributes: 'email',
-    includeGreetings: true,
-  } 
-);
+export default App

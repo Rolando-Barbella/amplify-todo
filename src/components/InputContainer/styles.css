@@ -1,0 +1,16 @@
+.account-container {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+label {
+  font-size: 1.2rem;
+  margin-right: 10px;
+  width: 100px;
+}
+
+.account-input {
+  padding: 8px;
+  border: 1px solid #999898;
+}
