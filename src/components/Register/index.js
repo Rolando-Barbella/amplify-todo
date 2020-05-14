@@ -1,9 +1,10 @@
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import InputContainer from '../InputContainer'
+import { useHistory } from "react-router-dom";
 
-
-const Register = ({ setStep }) => {
+const Register = () => {
+  let history = useHistory();
   const [user, setUser] = useState({ username: '', password: '', });
 
   const handleInputChange = (event, keyName) => {
@@ -20,30 +21,54 @@ const Register = ({ setStep }) => {
         password: user.password,
       });
       console.log('success');
-      setStep();
+      history.push("/confirm-register");
     } catch (error) {
       console.log('error', error);
     }
   }
   return (
-    <>
-      <InputContainer
-        labelName='Email:'
-        value={user.username}
-        keyValueName="username"
-        handleInputChange={(e) => handleInputChange(e, 'username')}
-      />
-      <InputContainer
-        labelName='Password:'
-        type="password"
-        value={user.password}
-        handleInputChange={(e) => handleInputChange(e, 'password')}
-      />
-      <button onClick={() => signUp()}>
-        Registrate
-      </button>
-      <hr />
-    </>
+    <div className="container w-4/12 w-medium">
+      <div className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4">
+        <h3 className="text-lg text-gray-700">Registrate con AWS amplify</h3>
+        <InputContainer
+          labelName='Email:'
+          value={user.username}
+          handleInputChange={(e) => handleInputChange(e, 'username')}
+        />
+        <InputContainer
+          labelName='Password:'
+          type="password"
+          value={user.password}
+          handleInputChange={(e) => handleInputChange(e, 'password')}
+        />
+        <div className="flex items-center justify-between">
+          <button
+            className="btn-primary text-white py-3 px-4 focus:outline-none focus:shadow-outline"
+            type="button"
+            onClick={() => signUp()}
+          >
+            Registrate
+          </button>
+          <a
+            className="link inline-block align-baseline text-sm text-gray-500 hover:text-gray-800"
+            href=""
+            onClick={() => history.push('./forgot-password')}
+          >
+            Forgot Password?
+          </a>
+        </div>
+        <div style={{ width: '100%' }} className="pt-3">
+          <hr />
+          <p className="text-gray-700 pb-2 pt-2 text-md">Posees una cuenta?</p>
+          <p 
+            onClick={() => history.push('./sign-in')}
+            className="inline-block align-baseline text-md text-blue-500 hover:text-blue-800"
+          >
+            Ingresa
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }
 
