@@ -25,7 +25,7 @@ const ForgotPasswordSubmit = () => {
   }
   return (
     <div className="container w-4/12 w-medium">
-      <div className="shadow-lg rounded px-12 pt-6 pb-8 mb-4">
+      <div className="bg-white shadow-xl rounded px-12 pt-6 pb-8 mb-4">
         <h3 className="text-lg text-gray-700">Reenviar datos de cuenta</h3>
         <InputContainer
           labelName='Email:'

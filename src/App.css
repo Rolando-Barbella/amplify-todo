@@ -58,12 +58,11 @@ input {
   margin-right: 10px;
 }
 
-.country-update {
-  animation: blinker 2s linear 0.1s;
+.fb {
+  background: #3c5898;
+  cursor: pointer;
 }
 
-@keyframes blinker {
-  20%{
-    opacity: 0;
-  }
+.fb:hover {
+  background: #5477c7;
 }

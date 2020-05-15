@@ -1,5 +1,5 @@
-import Amplify, { Auth } from 'aws-amplify';
-import React, { useState, useEffect } from 'react';
+import Amplify from 'aws-amplify';
+import React from 'react';
 import ConfirmRegister from './components/ConfirmRegister'
 import ForgotPassword from './components/ForgotPassword'
 import ForgotPasswordSubmit from './components/ForgotPasswordSubmit'
