@@ -42,20 +42,9 @@ const Register = () => {
     }
   }
 
-  let location = useLocation();
   const registerFb = async() => {
-    debugger
     try {
-      console.log(location.pathname);
       await Auth.federatedSignIn({ provider: "Facebook" } );
-      if(location.pathname  !== '/') {
-        alert('hereee')
-      }
-      // await Auth.currentAuthenticatedUser();
-      // console.log(location.pathname);
-
-      debugger
-      // await history.push("/home-page");
     } catch(e) {
       console.log('not possible')
     }
@@ -96,9 +85,7 @@ const Register = () => {
             onClick={() => registerFb()}
             className="fb rounded-t-full rounded-r-full rounded-b-full text-white py-5 px-5 focus:outline-none focus:shadow-outline"
           >
-            <FaFacebookF
-              size={16}
-            />
+            <FaFacebookF size={16} />
           </div>
         </div>
         <div style={{ width: '100%' }} className="pt-3">
