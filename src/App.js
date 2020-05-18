@@ -1,5 +1,5 @@
 import '@aws-amplify/ui/dist/style.css';
-import Amplify, { Analytics, graphqlOperation } from 'aws-amplify';
+import Amplify, { Analytics, graphqlOperation, Auth } from 'aws-amplify';
 import { Connect, withAuthenticator } from 'aws-amplify-react'; // or 'aws-amplify-react-native';
 import React, { useEffect } from 'react';
 import AddTodo from './components/AddTodo';
@@ -53,6 +53,11 @@ const addTodo = `mutation createTodo($name:String!) {
 
 function App() {
   useEffect(() => {
+    let getUser = async () => {
+      let user = await Auth.currentAuthenticatedUser()
+      console.log(user)
+    }
+    getUser();
     Analytics.record('Amplify_CLI');
   },[]);
 
@@ -70,6 +75,7 @@ function App() {
           query={graphqlOperation(listTodos)}
           subscription={graphqlOperation(subscriptions.onCreateTodo)}
           onSubscriptionMsg={(prev, { onCreateTodo }) => {
+            console.log(prev)
             prev.listTodos.items = prev.listTodos.items.concat(onCreateTodo)
             return prev; 
           }}
