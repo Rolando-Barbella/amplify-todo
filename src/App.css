@@ -66,3 +66,12 @@ input {
 .fb:hover {
   background: #5477c7;
 }
+
+.goo {
+  background: #de5246;
+  cursor: pointer;
+}
+
+.goo:hover {
+  background: #f37b70;
+}

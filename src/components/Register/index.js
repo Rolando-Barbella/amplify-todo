@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from 'react'; 
 import { Auth } from 'aws-amplify';
 import { FaFacebookF } from 'react-icons/fa'
+import { RiGoogleLine } from 'react-icons/ri'
 import InputContainer from '../InputContainer'
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   let history = useHistory();
   const [user, setUser] = useState({ username: '', password: '', });
-
-  // useEffect(() => {
-  //   let getUser = async() => {
-  //     try {
-  //       // Auth.signOut();
-  //       let user = await Auth.currentAuthenticatedUser();
-  //       debugger
-  //       console.log('user', user);
-  //     } catch (error) {
-  //       console.log(error)        
-  //     }
-  //   }
-  //   getUser();
-  // },[]);
 
   const handleInputChange = (event, keyName) => {
     event.persist();
@@ -28,6 +15,10 @@ const Register = () => {
       return { ...user, [keyName]: event.target.value }
     })
   }
+
+  // useEffect(async() => {
+  //   await Auth.signOut()
+  // })
 
   const signUp = async () => {
     try {
@@ -45,6 +36,17 @@ const Register = () => {
   const registerFb = async() => {
     try {
       await Auth.federatedSignIn({ provider: "Facebook" } );
+      await history.push('./')
+      console.log('success google')
+    } catch(e) {
+      console.log('not possible')
+    }
+  }
+
+  const registerGoogle = async() => {
+    try {
+      await Auth.federatedSignIn({ provider: "Google" } );
+      console.log('success google')
     } catch(e) {
       console.log('not possible')
     }
@@ -80,12 +82,18 @@ const Register = () => {
             Forgot Password?
           </a>
         </div>
-        <div className="flex items-center justify-center object-none object-center pt-4">
+        <div className="flex flex-row items-center justify-center object-none object-center pt-4">
           <div
             onClick={() => registerFb()}
-            className="fb rounded-t-full rounded-r-full rounded-b-full text-white py-5 px-5 focus:outline-none focus:shadow-outline"
+            className="fb rounded-t-full rounded-r-full rounded-b-full text-white py-5 px-5 focus:outline-none focus:shadow-outline mr-4"
           >
             <FaFacebookF size={16} />
+          </div>
+          <div
+            onClick={() => registerGoogle()}
+            className="goo rounded-t-full rounded-r-full rounded-b-full text-white py-5 px-5 focus:outline-none focus:shadow-outline"
+          >
+            <RiGoogleLine size={16} />
           </div>
         </div>
         <div style={{ width: '100%' }} className="pt-3">

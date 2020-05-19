@@ -20,7 +20,7 @@
             },
             "auth": {
                 "amplifytodo": {
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"693419361431310\",\"client_secret\":\"3e8ae12c54d8f956ed339bd24009023a\"}]"
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"693419361431310\",\"client_secret\":\"3e8ae12c54d8f956ed339bd24009023a\"},{\"ProviderName\":\"Google\",\"client_id\":\"732325691954-5k51cmif31p95gpr5s10o1bhlnqo7r92.apps.googleusercontent.com\",\"client_secret\":\"5c3ui819IL1HM8YKTmV_owKU\"}]"
                 }
             }
         }

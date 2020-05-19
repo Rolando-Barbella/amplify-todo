@@ -20,6 +20,7 @@ const SignIn = () => {
         username: user.username, 
         password: user.password,
       });
+      history.push('./')
       console.log('success sign in');
     } catch (error) {
       console.log('error', error);

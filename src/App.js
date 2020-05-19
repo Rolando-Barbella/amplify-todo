@@ -26,12 +26,12 @@ function App() {
     <div className="app-wrapper">
       <Router>
         <Switch>
+          <Route component={Register} path="/register" />
           <Route component={ForgotPasswordSubmit} path="/forgot-password-submit" />
           <Route component={ForgotPassword} path="/forgot-password" />
           <Route component={SignIn} path="/sign-in" />
           <Route component={ConfirmRegister} path="/confirm-register" />
-          <Route component={HomePage} path="/home-page" />
-          <Route component={Register} path="/" />
+          <Route component={HomePage} path="/" />
         </Switch>
       </Router>
     </div>

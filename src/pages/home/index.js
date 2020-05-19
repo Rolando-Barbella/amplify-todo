@@ -11,13 +11,14 @@ const HomePage = ({ userEmail }) => {
   useEffect(() => {
     let getUser = async() => {
       try {
+        // await Auth.signUp()
         let user = await Auth.currentAuthenticatedUser();
         await setSignInUser({ email: user.attributes.email});
         setIsLoading(false);
         console.log('user from home', user);
       } catch (error) {
         setIsLoading(false);
-        history.push('./sign-in')
+        // history.push('./sign-in')
         console.log(error)        
       }
     }

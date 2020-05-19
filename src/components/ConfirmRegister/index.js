@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import InputContainer from '../InputContainer'
 import { useHistory } from "react-router-dom";
 
-const ConfirmRegister = ({ setStep }) => {
+const ConfirmRegister = () => {
   let history = useHistory();
   const [user, setUser] = useState({ username: '', authenticationCode: '', });
 
@@ -18,7 +18,7 @@ const ConfirmRegister = ({ setStep }) => {
     try {
       await Auth.confirmSignUp(user.username, user.authenticationCode);
       console.log('success confirm sign up');
-      history.push('./home-page')
+      history.push('./')
     } catch (error) {
       console.log('error', error);
     }
