@@ -3,3 +3,10 @@ type Todo @model {
   name: String!
   description: String
 }
+
+type Tweet @model {
+  id: ID
+  tweet: String!
+  retweet: Int
+  likes: Int
+}
