@@ -9,9 +9,9 @@ a {
   cursor: pointer;
 }
 
-a:hover {
+/* a:hover {
   color: #B33;
-}
+} */
 
 a:hover .name {
   text-decoration: underline;
@@ -111,6 +111,7 @@ p {
   cursor: pointer;
   font-size: 16px;
   margin-top: 12px;
+  width: 90px;
 }
 
 .tweet > .actions > .fa-reply:hover {
@@ -122,6 +123,10 @@ p {
 }
 
 .tweet > .actions > .fa-heart:hover {
+  
+}
+
+.fa-heart {
   color: #B33;
 }
 
@@ -133,4 +138,34 @@ p {
 
 .icon p {
   margin-left: 5px;
+}
+
+
+.heart-2 {
+  width: 100px;
+  height: 100px;
+  transform: translate(-50%, -50%);
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.heart-2:hover {
+  background-image: linear-gradient();
+}
+
+.heart-blast {
+  background-position: -2800px 0;
+  transition: background 1s steps(28);
+}
+
+.is-active {
+  transition-duration: 1s;
+  background-position: -2800px 100px;
+}
+
+.stage {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -10,6 +10,8 @@ export const createTodo = /* GraphQL */ `
       id
       name
       description
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -22,6 +24,8 @@ export const updateTodo = /* GraphQL */ `
       id
       name
       description
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -34,6 +38,101 @@ export const deleteTodo = /* GraphQL */ `
       id
       name
       description
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createTweet = /* GraphQL */ `
+  mutation CreateTweet(
+    $input: CreateTweetInput!
+    $condition: ModelTweetConditionInput
+  ) {
+    createTweet(input: $input, condition: $condition) {
+      id
+      tweet
+      retweet
+      likes
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateTweet = /* GraphQL */ `
+  mutation UpdateTweet(
+    $input: UpdateTweetInput!
+    $condition: ModelTweetConditionInput
+  ) {
+    updateTweet(input: $input, condition: $condition) {
+      id
+      tweet
+      retweet
+      likes
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteTweet = /* GraphQL */ `
+  mutation DeleteTweet(
+    $input: DeleteTweetInput!
+    $condition: ModelTweetConditionInput
+  ) {
+    deleteTweet(input: $input, condition: $condition) {
+      id
+      tweet
+      retweet
+      likes
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPost = /* GraphQL */ `
+  mutation CreatePost(
+    $input: CreatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    createPost(input: $input, condition: $condition) {
+      id
+      title
+      rating
+      status
+      retweet
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePost = /* GraphQL */ `
+  mutation UpdatePost(
+    $input: UpdatePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    updatePost(input: $input, condition: $condition) {
+      id
+      title
+      rating
+      status
+      retweet
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePost = /* GraphQL */ `
+  mutation DeletePost(
+    $input: DeletePostInput!
+    $condition: ModelPostConditionInput
+  ) {
+    deletePost(input: $input, condition: $condition) {
+      id
+      title
+      rating
+      status
+      retweet
+      createdAt
+      updatedAt
     }
   }
 `;

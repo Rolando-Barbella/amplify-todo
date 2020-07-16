@@ -5,8 +5,21 @@ type Todo @model {
 }
 
 type Tweet @model {
-  id: ID
+  id: ID!
   tweet: String!
   retweet: Int
   likes: Int
+}
+
+enum PostStatus {
+  ACTIVE
+  INACTIVE
+}
+
+type Post @model {
+  id: ID!
+  title: String!
+  rating: Int!
+  status: PostStatus!
+  retweet: Int
 }
